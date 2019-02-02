@@ -1,4 +1,4 @@
-from cookiespool.scheduler import Scheduler
+from CookiesPool.cookiespool.scheduler import Scheduler
 
 def main():
     s = Scheduler()
