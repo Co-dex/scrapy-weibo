@@ -1,12 +1,12 @@
 # import requests
-import easygui as gui
+# import easygui as gui
 from CookiesPool.cookiespool.db import RedisClient
 conn = RedisClient('accounts', 'weibo')
 
 
 def account_set(account, sep='----'):
     username, password = account.split(sep)
-    result = conn.set(username, password)
+    result = conn.set(username, password)  # 导入数据库
     print('账号', username, '密码', password)
     print('录入成功' if result else '录入失败')
 
@@ -33,8 +33,13 @@ def scan_auto(filepath):
 
 
 def main(auto_Scan=True):
+    """
+    importer main(auto_Scan)
+    :param auto_Scan: auto scan account.txt default is True
+    :return: None
+    """
     if auto_Scan:
-        scan_auto(gui.fileopenbox('请选择account.txt', ))
+        scan_auto('account.txt')
     else:
         scan()
 
