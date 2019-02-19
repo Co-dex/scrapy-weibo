@@ -1,7 +1,7 @@
 import json
 from flask import Flask, g
-from CookiesPool.cookiespool.config import *
-from CookiesPool.cookiespool.db import *
+from cookiespool.config import *
+from cookiespool.db import *
 
 __all__ = ['app']
 

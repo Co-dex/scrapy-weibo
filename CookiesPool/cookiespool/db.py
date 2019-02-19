@@ -1,6 +1,6 @@
 import random
 import redis
-from CookiesPool.cookiespool.config import *
+from cookiespool.config import *
 
 
 class RedisClient(object):

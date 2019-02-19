@@ -1,5 +1,5 @@
-from CookiesPool.cookiespool.scheduler import Scheduler
-from CookiesPool.cookiespool import importer
+from cookiespool.scheduler import Scheduler
+from cookiespool import importer
 
 
 def main():
@@ -8,14 +8,20 @@ def main():
         if confirm.lower() == 'y' or confirm.lower() == 'n':
             if confirm == 'y':
                 confirm = True
+                break
             else:
                 confirm = False
-            break
+                break
         print('input error！ try again...')
 
     if confirm:
-        auto_flag = False if input('是否自动扫描account.txt Y/N: ').lower() == 'n' else auto_flag = True
-        importer.main(auto_Scan=auto_flag)
+        flag = input('是否自动扫描account.txt Y/N: ').lower()
+        if flag == 'n':
+            flag = False
+        else:
+            flag = True
+
+        importer.main(auto_Scan=flag)
     else:
         s = Scheduler()
         s.run()

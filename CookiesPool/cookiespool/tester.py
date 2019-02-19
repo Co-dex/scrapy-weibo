@@ -1,7 +1,7 @@
 import json
 import requests
 from requests.exceptions import ConnectionError
-from CookiesPool.cookiespool.db import *
+from cookiespool.db import *
 
 
 class ValidTester(object):

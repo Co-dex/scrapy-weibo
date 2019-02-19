@@ -13,13 +13,14 @@ TEMPLATES_FOLDER = dirname(abspath(__file__)) + '/templates/'
 
 
 class WeiboCookies():
-    def __init__(self, username, password, browser):
+    def __init__(self, username, password, browser,accountdb,cookiesdb):
         self.url = 'https://passport.weibo.cn/signin/login?entry=mweibo&r=https://m.weibo.cn/'
         self.browser = browser
         self.wait = WebDriverWait(self.browser, 20)
         self.username = username
         self.password = password
-    
+        self.accountdb = accountdb
+        self.cookiesdb = cookiesdb
     def open(self):
         """
         打开网页输入用户名密码并点击

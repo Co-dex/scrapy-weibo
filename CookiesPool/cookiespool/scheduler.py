@@ -1,13 +1,15 @@
 import time
 from multiprocessing import Process
 
-from CookiesPool.cookiespool.api import app
-from CookiesPool.cookiespool.config import *
-from CookiesPool.cookiespool.generator import *
-from CookiesPool.cookiespool.tester import *
-
+from cookiespool.api import app
+from cookiespool.config import *
+from cookiespool.generator import *
+from cookiespool.tester import *
+import threading
 
 class Scheduler(object):
+
+
     @staticmethod
     def valid_cookie(cycle=CYCLE):
         while True:
@@ -22,20 +24,19 @@ class Scheduler(object):
             except Exception as e:
                 print(e.args)
     
-    @staticmethod
-    def generate_cookie(cycle=CYCLE):
+
+    def generate_cookie(self,cycle=CYCLE):
+
         while True:
             print('Cookies生成进程开始运行')
             try:
-                for website, cls in GENERATOR_MAP.items():
-                    generator = eval(cls + '(website="' + website + '")')
-                    generator.run()
-                    print('Cookies生成完成')
-                    generator.close()
-                    time.sleep(cycle)
+                generator = MyWeiboCookiesGenerator(website='weibo')
+                generator.run()
+                print('Cookies生成完成')
+                generator.close()
+                time.sleep(cycle)
             except Exception as e:
                 print(e.args)
-    
     @staticmethod
     def api():
         print('API接口开始运行')
@@ -47,8 +48,10 @@ class Scheduler(object):
             api_process.start()
         
         if GENERATOR_PROCESS:
-            generate_process = Process(target=Scheduler.generate_cookie)
-            generate_process.start()
+            self.generate_cookie()
+            # event = threading.Event()
+            # generate_process = Process(target=Scheduler.generate_cookie,args=(event,))
+            # generate_process.start()
         
         if VALID_PROCESS:
             valid_process = Process(target=Scheduler.valid_cookie)

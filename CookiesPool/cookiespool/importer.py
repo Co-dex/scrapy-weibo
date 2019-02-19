@@ -1,6 +1,7 @@
 # import requests
 # import easygui as gui
-from CookiesPool.cookiespool.db import RedisClient
+from cookiespool.db import RedisClient
+
 conn = RedisClient('accounts', 'weibo')
 
 

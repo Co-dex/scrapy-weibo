@@ -5,14 +5,14 @@ REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 
 # Redis密码，如无填None
-REDIS_PASSWORD = 'foobared'
+REDIS_PASSWORD = None
 
 # 产生器使用的浏览器
 BROWSER_TYPE = 'Chrome'
 
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
-    'weibo': 'WeiboCookiesGenerator'
+    'weibo': 'MyWeiboCookiesGenerator'
 }
 
 # 测试类，如扩展其他站点，请在此配置
