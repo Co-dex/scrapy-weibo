@@ -62,7 +62,7 @@ DOWNLOADER_MIDDLEWARES = {
     'weibo.middlewares.CookiesMiddleware': 543,
 }
 
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 3
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 # EXTENSIONS = {
