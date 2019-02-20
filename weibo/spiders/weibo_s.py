@@ -1,12 +1,15 @@
  # -*- coding: utf-8 -*-
 import re
 from scrapy import Spider, FormRequest, Request
+from weibo.items import WeiboItem
+import logging
+
 class WeiboSSpider(Spider):
     name = 'weibo_s'
     allowed_domains = ['weibo.cn']
     search_url = 'https://weibo.cn/search/mblog'
     max_page = 100
-
+    logger = logging.getLogger(__name__)
 
     def start_requests(self):
         keyword = 'furry'
@@ -41,3 +44,14 @@ class WeiboSSpider(Spider):
         posted_at = response.xpath('//div[@id="M_"]//span[@class="ct"]//text()').extract_first(default=None)
         user = response.xpath('//div[@id="M_"]/div/a/text()').extract_first(default=None)
         print(posted_at, user)
+        weibo_item = WeiboItem()
+        for field in weibo_item.fields:
+            try:
+                weibo_item[field] = eval(field)
+            except NameError:
+                self.logger.debug('Field No Defined!' + field)
+        yield weibo_item
+
+
+
+
