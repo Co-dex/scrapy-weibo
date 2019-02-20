@@ -6,9 +6,18 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-
+from scrapy import Field
 
 class WeiboItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    id = Field()
+    user = Field()
+    content = Field()
+    forward_count = Field()
+    comment_count = Field()
+    like_count = Field()
+    url = Field()
+    posted_at = Field()
+
+
