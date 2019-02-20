@@ -22,6 +22,8 @@ class WeiboPipeline(object):
                 item['posted_at'] = item['posted_at'].strip()
                 item['posted_at'] = self.parse_time(item['posted_at'])
 
+        return item
+
     def parse_time(self, datetime):
         if re.match('\d+月\d+日', datetime):
             datetime = time.strftime('%Y年', time.localtime()) + datetime
@@ -55,5 +57,6 @@ class MongoPipeLine(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[item.table_name].update({'id': item.get('id')}, {'$set': dict(item)}, True) # 去重
+        if isinstance(item, WeiboItem):
+            self.db[item.collection].update({'id': item.get('id')}, {'$set': item}, True)  # 去重
         return item
