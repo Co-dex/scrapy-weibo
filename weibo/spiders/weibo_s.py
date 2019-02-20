@@ -1,7 +1,6 @@
  # -*- coding: utf-8 -*-
 import re
 from scrapy import Spider, FormRequest, Request
-
 class WeiboSSpider(Spider):
     name = 'weibo_s'
     allowed_domains = ['weibo.cn']
@@ -29,9 +28,9 @@ class WeiboSSpider(Spider):
                 detail_url = weibo.xpath('.//a[contains(., "评论[")]//@href').extract_first()
             yield Request(detail_url, callback=self.parse_detail)
 
-
     def parse_detail(self, response):
-        id = re.search('comment\/(.*?)\?', response.url).group(1)
+        print('-----parse_detail------')
+        id = re.search('comment/(.*?)\?', response.url).group(1)
         url = response.url
-        content = response.xpath('//div[@id="M_"]//span[@class="ctt"]').extract_first()
+        content = ''.join(response.xpath('//div[@id="M_"]//span[@class="ctt"]//text()').extract())
         print(id, url, content)
