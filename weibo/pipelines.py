@@ -53,3 +53,7 @@ class MongoPipeLine(object):
 
     def close_spider(self, spider):
         self.client.close()
+
+    def process_item(self, item, spider):
+        self.db[item.table_name].update({'id': item.get('id')}, {'$set': dict(item)}, True) # 去重
+        return item
