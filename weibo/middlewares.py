@@ -10,6 +10,7 @@ import logging
 from  requests.exceptions import ConnectionError
 import requests
 from scrapy import signals
+from scrapy.exceptions import IgnoreRequest
 
 
 class WeiboSpiderMiddleware(object):
@@ -135,6 +136,29 @@ class CookiesMiddleware(object):
         else:
             self.logger.debug('No Valid Cookies')
 
+    # def process_response(self, request, response, spider):
+    #     """
+    #     异常处理
+    #     :param request:
+    #     :param response:
+    #     :param spider:
+    #     :return: response
+    #     """
+    #     if response.status in [300, 301, 302, 303]:
+    #         try:
+    #             redirect_url = response.headers['location']
+    #             if 'passport' in redirect_url:
+    #                 self.logger.warning('Need Updating Cookies')
+    #             elif 'weibo.cn/security' in redirect_url:
+    #                 self.logger.warning('Account has been locked!')
+    #             request.cookies = self._get_random_cookies()
+    #             return request
+    #         except:
+    #             raise IgnoreRequest
+    #     elif response.status in [414]:
+    #         return request
+    #     else:
+    #         return response
 
 
 

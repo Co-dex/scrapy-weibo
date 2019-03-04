@@ -63,6 +63,7 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 DOWNLOAD_DELAY = 3
+
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 # EXTENSIONS = {
