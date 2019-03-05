@@ -98,5 +98,6 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 COOKIES_POOL_URL = 'http://127.0.0.1:5000/weibo/random'
-MONGO_URI = 'localhost'
+MONGO_URI = ('mongodb://dx:dxmongo@106.15.201.90:28017,106.15.201.90:28018,'
+             '106.15.201.90:28019/?authSource=admin&readPreference=primary&replicaSet=dxRepSet')
 MONGO_DB = 'weibo'
