@@ -1,11 +1,12 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import re
 from scrapy import Spider, FormRequest, Request
 from weibo.items import WeiboItem
 import logging
 
-class WeiboSSpider(Spider):
-    name = 'weibo_s'
+
+class lianghuiSpider(Spider):
+    name = '吉林工商学院'
     allowed_domains = ['weibo.cn']
     search_url = 'https://weibo.cn/search/mblog'
     max_page = 100
@@ -13,7 +14,7 @@ class WeiboSSpider(Spider):
     keyword = ""
 
     def start_requests(self):
-        self.keyword = 'furry'
+        self.keyword = self.name
         url = '{url}?keyword={keyword}'.format(url=self.search_url, keyword=self.keyword)
         for page in range(1, self.max_page + 1):
             data = {
@@ -34,6 +35,8 @@ class WeiboSSpider(Spider):
 
     def parse_detail(self, response):
         print('-----parse_detail------')
+        collection = self.name  # collection 名称赋值
+        print("Collection Name: ", collection)
         id = re.search('comment/(.*?)\?', response.url).group(1)
         url = response.url
         content = ''.join(response.xpath('//div[@id="M_"]//span[@class="ctt"]//text()').extract())
@@ -49,11 +52,9 @@ class WeiboSSpider(Spider):
         for field in weibo_item.fields:
             try:
                 weibo_item[field] = eval(field)
-                weibo_item.collection = self.keyword  # 根据关键词创建表名
             except NameError:
                 self.logger.debug('Field No Defined!' + field)
         yield weibo_item
 
-
-
-
+    def parse(self, response):
+        pass
