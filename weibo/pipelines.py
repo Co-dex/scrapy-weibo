@@ -58,5 +58,5 @@ class MongoPipeLine(object):
 
     def process_item(self, item, spider):
         if isinstance(item, WeiboItem):
-            self.db[item.collection].update({'id': item.get('id')}, {'$set': item}, True)  # 去重
+            self.db[item['collection']].update({'id': item.get('id')}, {'$set': item}, True)  # 去重
         return item

@@ -75,6 +75,7 @@ DOWNLOAD_DELAY = 3
 ITEM_PIPELINES = {
     'weibo.pipelines.WeiboPipeline': 300,
     'weibo.pipelines.MongoPipeLine': 301
+    # 'scrapy_redis.pipelines.RedisPipeline': 302
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -97,7 +98,13 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-COOKIES_POOL_URL = 'http://127.0.0.1:5000/weibo/random'
-MONGO_URI = ('mongodb://dx:dxmongo@106.15.201.90:28017,106.15.201.90:28018,'
-             '106.15.201.90:28019/?authSource=admin&readPreference=primary&replicaSet=dxRepSet')
+COOKIES_POOL_URL = 'http://192.168.50.199:5000/weibo/random'
+MONGO_URI = ('mongodb://dx:dxmongo@dxlocal:28017,dxlocal:28018,'
+             'dxlocal:28019/?authSource=admin&readPreference=primary&replicaSet=dxRepSet')
 MONGO_DB = 'weibo'
+
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+REDIS_URL = 'redis://root:dxredis@dxlocal:7380'
